@@ -29,7 +29,7 @@ if [ $? -eq 0 ]; then
   if [ $mod -eq 0 ]; then
     minor=$(printf '%02d' $((minor+1)))
   fi
-  version="$major.$minor"
+  version="$major.$minor-nc"
 
   echo $version.$date | tr -d 'v'
   exit 1
