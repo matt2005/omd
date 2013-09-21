@@ -1,26 +1,27 @@
 
 
-   OMD - the Open Monitoring Distribution (New Cores Edition)
+   OMD - the Open Monitoring Distribution (Naemon Core Edition)
       <http://omdistro.org/> - <http://labs.consol.de
 
 The OMD New Cores Edition is a test and integration platform based on
-OMD for Nagios4 and Icinga2. APIs have changed, new Livestatus
-implementations have been build, so this build makes it easier to test
-the new cores with Thruk and Mod-Gearman.
+OMD for Naemon. APIs have changed, new Livestatus implementations have
+been build, so this build makes it easier to test the new cores with
+Thruk and Mod-Gearman.
 
 
-What OMD-NC additionally contains
----------------------------------
+What OMD-NC contains in addition
+--------------------------------
 
-  * Nagios4
-  * Livestatus for Nagios4
-  * MOD Gearman for Nagios4
-  * Icinga 2
+  * Naemon
+  * Livestatus for Naemon
+  * Mod-Gearman for Naemon
+  * PNP for Naemon
   * Best Practices:
     - Thruk
       - set as default gui
       - autostart enabled
-    - Nagios 4
+      - enable cookie authentication
+    - Naemon
       - enabled by default
 
 Licensing

@@ -19,17 +19,21 @@ PACKAGES=perl-modules \
          icinga \
          nagios \
          monitoring-plugins \
+         naemon \
          nagvis \
          nrpe \
          nsca \
          omd \
          pnp4nagios \
+         pnp4nagios4 \
          rrdtool \
          shinken \
          thruk \
          maintenance \
          gearmand \
          mod-gearman \
+         mod-gearman2 \
+         naemon-livestatus \
          patch \
          nail \
          notifications-tt
