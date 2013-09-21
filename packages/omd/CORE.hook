@@ -28,8 +28,9 @@ case "$1" in
             fi
     ;;
     choices)
-            [ ! -e $OMD_ROOT/bin/nagios ] || echo "nagios: Nagios"
-            [ ! -e $OMD_ROOT/bin/icinga ] || echo "icinga: Icinga"
+            [ ! -e $OMD_ROOT/bin/nagios ] || echo "nagios: Nagios 3"
+            [ ! -e $OMD_ROOT/bin/icinga ] || echo "icinga: Icinga 1"
+            [ ! -e $OMD_ROOT/bin/icinga2 ] || echo "icinga2: Icinga 2 (experimental)"
             [ ! -e $OMD_ROOT/bin/shinken-arbiter ] || echo "shinken: Shinken"
             echo "none: No monitoring core"
     ;;
