@@ -1,7 +1,7 @@
 include ../../Makefile.omd
 
 NAME = icinga2
-VERSION = 0.0.2
+VERSION = 2.2.0
 DIR = $(NAME)-$(VERSION)
 
 .PHONY: skel
@@ -10,15 +10,20 @@ DIR = $(NAME)-$(VERSION)
 # as non-root, we use our own user and group for compiling.
 # All files will be packaged as user 'root' later anyway.
 CONFIGUREOPTS = \
-    --prefix=$(OMD_ROOT)
+    -DCMAKE_INSTALL_PREFIX=$(OMD_ROOT) \
+    -DINSTALL_SBINDIR=$(OMD_ROOT)/bin \
+    -DICINGA2_WITH_MYSQL=OFF \
+    -DICINGA2_WITH_PGSQL=OFF
 
 build:
 	tar xzf $(DIR).tar.gz
-	cd $(DIR) ; ./configure $(CONFIGUREOPTS)
-	$(MAKE) -j 2 -C $(DIR) all
+	mkdir -p $(DIR)/build
+	cd $(DIR)/build; cmake .. $(CONFIGUREOPTS)
+	cd $(DIR)/build; make
+	#$(MAKE) -j 2 -C $(DIR) all
 
 install:
-	$(MAKE) DESTDIR=$(DESTDIR) -C $(DIR) install
+	$(MAKE) DESTDIR=$(DESTDIR) -C $(DIR)/build install
 	rm -rf $(DESTDIR)$(OMD_ROOT)/etc
 	rm -rf $(DESTDIR)$(OMD_ROOT)/var
 
@@ -28,15 +33,3 @@ skel:
 
 clean:
 	rm -rf $(DIR)
-
-upstream:
-	git rm *.gz
-	wget "https://git.icinga.org/?p=icinga2.git;a=snapshot;refs/heads/master;hb=master;sf=tgz" -O icinga2.tar.gz
-	tar zxf icinga2.tar.gz
-	cd icinga2 && ./autogen.sh && make dist
-	rm -rf icinga2.tar.gz
-	mv icinga2/*.gz .
-	VERSION=$$(ls *.gz | sed -e 's/^icinga2-//' -e 's/.tar.gz$$//'); sed -i Makefile -e 's/^VERSION = .*/VERSION = '$$VERSION'/g'
-	git add *.gz
-	git commit -a -m "icinga2: update to latest $$(ls -1 *.gz)"
-	rm -rf icinga2

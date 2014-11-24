@@ -12,7 +12,7 @@ BEGIN {
     use lib "$FindBin::Bin/lib/lib/perl5";
 }
 
-plan skip_all => "icinga2 not included, cannot test" unless -x '/omd/versions/default/bin/icinga2';
+#plan skip_all => "icinga2 not included, cannot test" unless -x '/omd/versions/default/bin/icinga2';
 plan( tests => 27 );
 
 ##################################################
