@@ -1,14 +1,14 @@
 include ../../Makefile.omd
 
-NAME     = mod_gearman
-VERSION  = master
+NAME     = mod_gearman2
+VERSION  = 2.0.0
 GEARMAND = $(shell grep "^VERSION " ../gearmand/Makefile | awk '{ print $$3 }')
-DIR      = mod_gearman-$(VERSION)
+DIR      = $(NAME)-$(VERSION)
 
 .PHONY: skel
 
 build:
-	tar xzf mod_gearman-$(VERSION).tar.gz
+	tar xzf $(DIR).tar.gz
 	cd $(DIR)/include && ln -sfn $(shell ls -d1 `pwd`/../naemon/naemon-core-master/naemon) .
 	cd $(DIR) && \
 	C_INCLUDE_PATH=$(shell pwd)/../naemon/naemon-core-master/ \
@@ -23,13 +23,3 @@ skel:
 
 clean:
 	rm -rf $(DIR)
-
-upstream:
-	rm -f mod-gearman-master.tar.gz
-	wget https://github.com/sni/mod_gearman/tarball/master -O tmp.tar.gz
-	tar zxf tmp.tar.gz
-	mv sni-mod_gearman-??????? mod_gearman-master
-	cd mod_gearman-master && ./autogen.sh
-	tar cfz mod_gearman-master.tar.gz mod_gearman-master
-	git add mod_gearman-master.tar.gz
-	rm -rf mod_gearman-master tmp.tar.gz
